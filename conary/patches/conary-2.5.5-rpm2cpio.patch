@@ -1,0 +1,11 @@
+--- scripts/Makefile	2014-09-10 12:40:59.000000000 -0400
++++ scripts/Makefile.new	2014-10-24 11:25:02.397916691 -0400
+@@ -19,7 +19,7 @@ extra_dist = Makefile \
+              logaction.py changemail.py \
+ 	     perlreqs.pl findmissingbuildreqs
+ 
+-bin_scripts = rpm2cpio dbsh conary-debug ccs2tar
++bin_scripts = dbsh conary-debug ccs2tar
+ util_scripts = \
+ 	dumpcontainer \
+ 	localupdateinfo \

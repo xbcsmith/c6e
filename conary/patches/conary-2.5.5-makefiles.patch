@@ -1,0 +1,281 @@
+diff -rupN conary-2.5.5/commands/Makefile conary-2.5.5.latest/commands/Makefile
+--- conary-2.5.5/commands/Makefile	2014-09-10 16:40:59.000000000 +0000
++++ conary-2.5.5.latest/commands/Makefile	2014-09-26 16:11:19.769860802 +0000
+@@ -46,5 +46,5 @@ dist: default-dist
+ clean: default-clean
+ 	rm -rf $(TOPDIR)/bin
+ 
+-
+-include $(TOPDIR)/Make.rules
++include ../Make.defs
++include ../Make.rules
+diff -rupN conary-2.5.5/conary/local/Makefile conary-2.5.5.latest/conary/local/Makefile
+--- conary-2.5.5/conary/local/Makefile	2014-09-10 16:40:59.000000000 +0000
++++ conary-2.5.5.latest/conary/local/Makefile	2014-09-26 15:39:43.139968903 +0000
+@@ -28,4 +28,5 @@ dist: default-dist
+ 
+ clean: default-clean
+ 
++include ../../Make.defs
+ include ../../Make.rules
+diff -rupN conary-2.5.5/config/arch/Makefile conary-2.5.5.latest/config/arch/Makefile
+--- conary-2.5.5/config/arch/Makefile	2014-09-10 16:40:59.000000000 +0000
++++ conary-2.5.5.latest/config/arch/Makefile	2014-09-26 15:46:33.479815134 +0000
+@@ -32,9 +32,9 @@ dist_files = Makefile $(arch_files)
+ all: default-all
+ 
+ install:
+-	mkdir -p $(DESTDIR)/etc/conary/arch/; \
++	mkdir -p $(DESTDIR)$(sysconfdir)/conary/arch/; \
+ 	for f in $(arch_files); do \
+-		$(CP) -a $$f $(DESTDIR)/etc/conary/arch/$$f; \
++		$(CP) -a $$f $(DESTDIR)$(sysconfdir)/conary/arch/$$f; \
+ 	done
+ 
+ dist: default-dist
+diff -rupN conary-2.5.5/config/components/base/Makefile conary-2.5.5.latest/config/components/base/Makefile
+--- conary-2.5.5/config/components/base/Makefile	2014-09-10 16:40:59.000000000 +0000
++++ conary-2.5.5.latest/config/components/base/Makefile	2014-09-26 15:46:15.670082620 +0000
+@@ -22,9 +22,9 @@ dist_files = Makefile $(filter_files)
+ all: default-all
+ 
+ install:
+-	mkdir -p $(DESTDIR)/etc/conary/components/base/; \
++	mkdir -p $(DESTDIR)$(sysconfdir)/conary/components/base/; \
+ 	for f in $(filter_files); do \
+-		$(CP) -a $$f $(DESTDIR)/etc/conary/components/base/$$f; \
++		$(CP) -a $$f $(DESTDIR)$(sysconfdir)/conary/components/base/$$f; \
+ 	done
+ 
+ dist: default-dist
+diff -rupN conary-2.5.5/config/components/invariant/Makefile conary-2.5.5.latest/config/components/invariant/Makefile
+--- conary-2.5.5/config/components/invariant/Makefile	2014-09-10 16:40:59.000000000 +0000
++++ conary-2.5.5.latest/config/components/invariant/Makefile	2014-09-26 15:46:01.558502075 +0000
+@@ -27,9 +27,9 @@ dist_files = Makefile $(filter_files)
+ all: default-all
+ 
+ install:
+-	mkdir -p $(DESTDIR)/etc/conary/components/invariant/; \
++	mkdir -p $(DESTDIR)$(sysconfdir)/conary/components/invariant/; \
+ 	for f in $(filter_files); do \
+-		$(CP) -a $$f $(DESTDIR)/etc/conary/components/invariant/$$f; \
++		$(CP) -a $$f $(DESTDIR)$(sysconfdir)/conary/components/invariant/$$f; \
+ 	done
+ 
+ dist: default-dist
+diff -rupN conary-2.5.5/config/Makefile conary-2.5.5.latest/config/Makefile
+--- conary-2.5.5/config/Makefile	2014-09-10 16:40:59.000000000 +0000
++++ conary-2.5.5.latest/config/Makefile	2014-09-26 15:45:52.006110843 +0000
+@@ -22,7 +22,7 @@ dist_files = Makefile pubring.gpg trustd
+ all: default-subdirs
+ 
+ install: install-subdirs
+-	$(INSTALL) --mode=644 pubring.gpg trustdb.gpg macros $(DESTDIR)/etc/conary
++	$(INSTALL) --mode=644 pubring.gpg trustdb.gpg macros $(DESTDIR)$(sysconfdir)/conary
+ 
+ dist: default-dist
+ 
+diff -rupN conary-2.5.5/config/mirrors/Makefile conary-2.5.5.latest/config/mirrors/Makefile
+--- conary-2.5.5/config/mirrors/Makefile	2014-09-10 16:40:59.000000000 +0000
++++ conary-2.5.5.latest/config/mirrors/Makefile	2014-09-26 15:45:34.905408950 +0000
+@@ -34,9 +34,9 @@ dist_files = Makefile $(mirror_files)
+ all: default-all
+ 
+ install:
+-	mkdir -p $(DESTDIR)/etc/conary/mirrors/; \
++	mkdir -p $(DESTDIR)$(sysconfdir)/conary/mirrors/; \
+ 	for f in $(mirror_files); do \
+-		$(CP) -a $$f $(DESTDIR)/etc/conary/mirrors/$$f; \
++		$(CP) -a $$f $(DESTDIR)$(sysconfdir)/conary/mirrors/$$f; \
+ 	done
+ 
+ dist: default-dist
+diff -rupN conary-2.5.5/config/recipeTemplates/Makefile conary-2.5.5.latest/config/recipeTemplates/Makefile
+--- conary-2.5.5/config/recipeTemplates/Makefile	2014-09-10 16:40:59.000000000 +0000
++++ conary-2.5.5.latest/config/recipeTemplates/Makefile	2014-09-26 15:46:25.231475856 +0000
+@@ -24,9 +24,9 @@ dist_files = Makefile $(template_files)
+ all: default-all
+ 
+ install:
+-	mkdir -p $(DESTDIR)/etc/conary/recipeTemplates/; \
++	mkdir -p $(DESTDIR)$(sysconfdir)/conary/recipeTemplates/; \
+ 	for f in $(template_files); do \
+-		$(CP) -a $$f $(DESTDIR)/etc/conary/recipeTemplates/$$f; \
++		$(CP) -a $$f $(DESTDIR)$(sysconfdir)/conary/recipeTemplates/$$f; \
+ 	done
+ 
+ dist: default-dist
+diff -rupN conary-2.5.5/config/site/Makefile conary-2.5.5.latest/config/site/Makefile
+--- conary-2.5.5/config/site/Makefile	2014-09-10 16:40:59.000000000 +0000
++++ conary-2.5.5.latest/config/site/Makefile	2014-09-26 15:47:18.156649091 +0000
+@@ -25,9 +25,9 @@ dist_files = Makefile $(site_files)
+ all: default-all
+ 
+ install:
+-	mkdir -p $(DESTDIR)/etc/conary/site/; \
++	mkdir -p $(DESTDIR)$(sysconfdir)/conary/site/; \
+ 	for f in $(site_files); do \
+-		$(CP) -a $$f $(DESTDIR)/etc/conary/site/$$f; \
++		$(CP) -a $$f $(DESTDIR)$(sysconfdir)/conary/site/$$f; \
+ 	done
+ 
+ dist: default-dist
+diff -rupN conary-2.5.5/config/use/Makefile conary-2.5.5.latest/config/use/Makefile
+--- conary-2.5.5/config/use/Makefile	2014-09-10 16:40:59.000000000 +0000
++++ conary-2.5.5.latest/config/use/Makefile	2014-09-26 15:46:44.502267468 +0000
+@@ -56,9 +56,9 @@ dist_files = Makefile $(use_files)
+ all: default-all
+ 
+ install:
+-	mkdir -p $(DESTDIR)/etc/conary/use/; \
++	mkdir -p $(DESTDIR)$(sysconfdir)/conary/use/; \
+ 	for f in $(use_files); do \
+-		$(CP) -a $$f $(DESTDIR)/etc/conary/use/$$f; \
++		$(CP) -a $$f $(DESTDIR)$(sysconfdir)/conary/use/$$f; \
+ 	done
+ 
+ dist: default-dist
+diff -rupN conary-2.5.5/extra/Makefile conary-2.5.5.latest/extra/Makefile
+--- conary-2.5.5/extra/Makefile	2014-09-10 16:40:59.000000000 +0000
++++ conary-2.5.5.latest/extra/Makefile	2014-09-26 15:45:27.136090285 +0000
+@@ -18,12 +18,12 @@
+ all: default-subdirs default-all
+ 
+ install: install-subdirs
+-	$(INSTALL) -D -m0644 repos/conary-repos.sysconfig $(DESTDIR)/etc/sysconfig/conary-repos
+-	$(INSTALL) -D -m0644 repos/gunicorn.conf $(DESTDIR)/etc/conary-repos/gunicorn.conf
+-	$(INSTALL) -D -m0644 repos/logrotate.conf $(DESTDIR)/etc/logrotate.d/conary-repos.conf
+-	$(INSTALL) -D -m0644 repos/nginx-globals $(DESTDIR)/etc/nginx/conf.d/conary-common.conf
+-	$(INSTALL) -D -m0644 repos/nginx-includes $(DESTDIR)/etc/conary-repos/nginx-includes
+-	$(INSTALL) -d -m0755 $(DESTDIR)/etc/conary-repos/vhosts
++	$(INSTALL) -D -m0644 repos/conary-repos.sysconfig $(DESTDIR)$(sysconfdir)/sysconfig/conary-repos
++	$(INSTALL) -D -m0644 repos/gunicorn.conf $(DESTDIR)$(sysconfdir)/conary-repos/gunicorn.conf
++	$(INSTALL) -D -m0644 repos/logrotate.conf $(DESTDIR)$(sysconfdir)/logrotate.d/conary-repos.conf
++	$(INSTALL) -D -m0644 repos/nginx-globals $(DESTDIR)$(sysconfdir)/nginx/conf.d/conary-common.conf
++	$(INSTALL) -D -m0644 repos/nginx-includes $(DESTDIR)$(sysconfdir)/conary-repos/nginx-includes
++	$(INSTALL) -d -m0755 $(DESTDIR)$(sysconfdir)/conary-repos/vhosts
+ 
+ 
+ clean: default-clean
+diff -rupN conary-2.5.5/Make.defs conary-2.5.5.latest/Make.defs
+--- conary-2.5.5/Make.defs	1970-01-01 00:00:00.000000000 +0000
++++ conary-2.5.5.latest/Make.defs	2014-09-26 16:56:43.853850967 +0000
+@@ -0,0 +1,36 @@
++#
++# Copyright (c) SAS Institute Inc.
++#
++# Licensed under the Apache License, Version 2.0 (the "License");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an "AS IS" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++#
++
++
++
++export TOPDIR = $(shell pwd)
++export VERSION = 2.5.5
++export CHANGESET = $(shell ./scripts/hg-version.sh)
++export DISTDIR = $(TOPDIR)/conary-$(VERSION)
++export install_dir ?= 
++export prefix ?= $(install_dir)/usr
++export sysconfdir ?= $(install_dir)/etc
++export lib ?= $(shell arch | $(SED) -r '/x86_64|ppc64|s390x|sparc64/{s/.*/lib64/;q};s/.*/lib/')
++export bindir ?= $(prefix)/bin
++export libdir ?= $(prefix)/$(lib)
++export libexecdir = $(prefix)/libexec
++export datadir = $(prefix)/share
++export mandir = $(datadir)/man
++export sitedir = $(libdir)/python$(PYVER)/site-packages/
++export conarydir = $(sitedir)/conary
++export conarylibdir = $(libdir)/conary
++export conarylibexecdir = $(libexecdir)/conary
++export initdir = $(sysconfdir)/rc.d/init.d
+diff -rupN conary-2.5.5/Makefile conary-2.5.5.latest/Makefile
+--- conary-2.5.5/Makefile	2014-09-10 16:40:59.000000000 +0000
++++ conary-2.5.5.latest/Makefile	2014-09-26 15:22:10.535755466 +0000
+@@ -17,22 +17,6 @@
+ 
+ all: subdirs
+ 
+-export TOPDIR = $(shell pwd)
+-export VERSION = 2.5.5
+-export CHANGESET = $(shell ./scripts/hg-version.sh)
+-export DISTDIR = $(TOPDIR)/conary-$(VERSION)
+-export prefix = /usr
+-export lib = $(shell uname -m | $(SED) -r '/x86_64|ppc64|s390x|sparc64/{s/.*/lib64/;q};s/.*/lib/')
+-export bindir = $(prefix)/bin
+-export libdir = $(prefix)/$(lib)
+-export libexecdir = $(prefix)/libexec
+-export datadir = $(prefix)/share
+-export mandir = $(datadir)/man
+-export sitedir = $(libdir)/python$(PYVER)/site-packages/
+-export conarydir = $(sitedir)/conary
+-export conarylibdir = $(libdir)/conary
+-export conarylibexecdir = $(libexecdir)/conary
+-
+ minimal:
+ 	NO_KID=1 $(MAKE) all
+ 
+@@ -127,4 +111,5 @@ ccs: dist
+ 	bin/cvc cook --build-label conary.rpath.com@rpl:devel conary-$(VERSION)/conary.recipe
+ 	rm -rf conary-$(VERSION)
+ 
++include Make.defs
+ include Make.rules
+diff -rupN conary-2.5.5/Make.rules conary-2.5.5.latest/Make.rules
+--- conary-2.5.5/Make.rules	2014-09-10 16:40:59.000000000 +0000
++++ conary-2.5.5.latest/Make.rules	2014-09-26 15:22:11.143780961 +0000
+@@ -16,8 +16,11 @@
+ 
+ 
+ PYVER=$(shell python -c 'import sys; print(sys.version[0:3])')
+-PYTHON = /usr/bin/python${PYVER}
+-PYINCLUDE = /usr/include/python${PYVER}
++PYTHON ?= $(shell [ -x /usr/bin/python ] && echo /usr/bin/python)
++PYVERSION ?= $(shell $(PYTHON) -c 'import os, sys; print sys.version[:3]')
++PYINCLUDE ?= $(shell $(PYTHON) -c 'import os, sys; print os.sep.join((sys.prefix, "include", "python" + sys.version[:3]))')
++
++
+ CYTHON = $(PYTHON) /usr/bin/cython
+ SED = sed
+ INSTALL = install
+@@ -27,8 +30,12 @@ PYFLAKES = /usr/bin/pyflakes
+ 
+ pyfiles-install:
+ ifdef python_files
+-	mkdir -p $(DESTDIR)/$(sitedir)/$(DIR)
+-	$(CP) -a $(python_files) $(DESTDIR)/$(sitedir)/$(DIR)/
++	echo $(DESTDIR)$(sitedir)/$(DIR)
++	mkdir -p $(DESTDIR)$(sitedir)/$(DIR) ; \
++	for f in $(python_files); do \
++		mkdir -p `dirname $(DESTDIR)/$(sitedir)/$(DIR)/$$f`; \
++		cp -a $$f $(DESTDIR)/$(sitedir)/$(DIR)/$$f; \
++	done
+ endif
+ 
+ check:
+diff -rupN conary-2.5.5/man/Makefile conary-2.5.5.latest/man/Makefile
+--- conary-2.5.5/man/Makefile	2014-09-10 16:40:59.000000000 +0000
++++ conary-2.5.5.latest/man/Makefile	2014-09-26 15:38:07.638049426 +0000
+@@ -36,4 +36,5 @@ dist: default-dist
+ 
+ clean: default-clean
+ 
++include ../Make.defs
+ include ../Make.rules
+diff -rupN conary-2.5.5/scripts/migration/Makefile conary-2.5.5.latest/scripts/migration/Makefile
+--- conary-2.5.5/scripts/migration/Makefile	2014-09-10 16:40:59.000000000 +0000
++++ conary-2.5.5.latest/scripts/migration/Makefile	2014-09-26 15:39:05.181411532 +0000
+@@ -33,4 +33,5 @@ dist: default-dist
+ 
+ clean: default-clean
+ 
++include ../../Make.defs
+ include ../../Make.rules
