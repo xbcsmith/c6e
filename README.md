@@ -9,16 +9,21 @@ Not for the weak
 
 ## Enable EPEL
 
+```sh
 yum install --enablerepo=extras epel-release
+```
 
 ## Dependencies
 
+```sh
 yum install python-lxml python-epdb python-crypto m2crypto python-kid libxslt
+```
 
 ## Dependencies for devel purposes only
 
+```sh
 yum install openssl-devel zlib-devel elfutils-libelf-devel python-devel gcc make automake procps rpmdevtools
-
+```
 
 ## Build an rpm
 
@@ -28,6 +33,7 @@ Use rpmdevtools to create your rpmbuild tree.
 
 ```sh
 rpmdev-setuptree
+```
 
 ### Get the sources
 
