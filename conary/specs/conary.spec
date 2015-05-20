@@ -29,6 +29,7 @@ Source1: http://sqlite.org/sqlite-autoconf-3071201.tar.gz
 #Source2: https://raw.githubusercontent.com/sassoftware/conary/master/recipes/unified/conary/el5-build-flags.patch
 
 Patch0: el5-build-flags.patch
+Patch1: %name-%version-rpm2cpio.patch
 Patch2: %name-%version-makefiles.patch
 
 BuildRequires: python-lxml python-epdb rpm-libs rpm-python openssl-devel python-crypto m2crypto zlib-devel elfutils-libelf-devel python-devel python-kid 
@@ -59,6 +60,7 @@ Conary software for installing, configuring, and managing a Conary Repository. A
 %setup -q 
 
 patch -p1 < %{_builddir}/%{name}-%{version}/recipes/unified/conary/el5-build-flags.patch
+%patch1 -p1
 %patch2 -p1
  
 CFLAGS="$CFLAGS -fPIC" 
@@ -93,7 +95,6 @@ PYINCLUDE=/usr/include/python%{_py_ver} PYTHON=/usr/bin/python%{_py_ver} PYVER=%
 %{_bindir}/conary
 %{_bindir}/conary-debug
 %{_bindir}/dbsh
-%{_bindir}/rpm2cpio
 %{_libdir}/conary/*
 %{_mandir}/man1/conary.*
 %{_datadir}/conary/dumpcontainer

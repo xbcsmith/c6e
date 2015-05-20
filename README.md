@@ -22,7 +22,9 @@ yum install openssl-devel zlib-devel elfutils-libelf-devel python-devel gcc make
 
 ## Build an rpm
 
-Use rpmdevtools to create your rpmbuild tree
+These instructions are for conary-2.5.5 we can update it after machine is assimilated.
+
+Use rpmdevtools to create your rpmbuild tree.
 
 `rpmdev-setuptree`
 
@@ -43,6 +45,7 @@ Use rpmdevtools to create your rpmbuild tree
 ### Time to build
 
 `cp ~/git/github/c6e/conary/specs/conary.spec ~/rpmbuild/SPECS/`
+
 `cp ~/git/github/c6e/conary/patches/*.patch ~/rpmbuild/SOURCES/`
 
 `cd ~/rpmbuild/SPECS`
