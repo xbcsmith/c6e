@@ -56,3 +56,43 @@ Use rpmdevtools to create your rpmbuild tree.
 
 `rpm -ivh ~/rpmbuild/RPMS/x86_64/conary-*.x86_64.rpm`
 
+## Create configs
+
+conaryrc
+
+`cat > .conaryrc << EOF
+name Anonymous
+contact <user>@email.com
+
+installLabelPath epel.cny.sas.com@sas:epel-6e centos6.rpath.com@rpath:centos-6-common centos6.rpath.com@rpath:centos-6e
+
+buildLabel foo@bar:f
+
+autoLoadRecipes group-superclasses=centos6.rpath.com@rpath:centos-6-common
+
+[x86_64]
+buildFlavor is: x86_64
+flavor is: x86_64
+flavor is: x86
+
+EOF`
+
+
+`touch base.system-model`
+
+`MODEL='group-epel-packages=epel.cny.sas.com@sas:epel-6e group-rpath-packages=centos6.rpath.com@rpath:centos-6-common group-os=centos6.rpath.com@rpath:centos-6e'
+
+for i in $MODEL;
+    do
+        GRP=$(conary rq $i --labels --flavors)
+        echo -en "search '${GRP}'\n" >> base.system-model
+done`
+
+`echo -en "\ninstall group-standard\n" >> base.system-model`
+
+`cp -v base.system-model /etc/conary/system-model`
+
+Run following to finish assimilation
+
+`conary sync --replace-unmanaged-files --replace-managed-files`
+
