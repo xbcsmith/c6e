@@ -82,6 +82,9 @@ installLabelPath epel.cny.sas.com@sas:epel-6e centos6.rpath.com@rpath:centos-6-c
 
 buildLabel foo@bar:f
 
+repositoryMap *.rpath.com https://updates.sas.com/conary
+repositoryMap *.sas.com https://updates.sas.com/conary
+
 autoLoadRecipes group-superclasses=centos6.rpath.com@rpath:centos-6-common
 
 [x86_64]
