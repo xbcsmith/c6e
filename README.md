@@ -42,13 +42,13 @@ mkdir -p ~/git/github
 
 cd ~/git/github
 
-git clone https:github.com/sassoftware/conary.git
+git clone https://github.com/sassoftware/conary.git
 
 cd conary
 
 git archive --prefix=conary-2.5.5/ conary-2.5.5 | gzip > ~/rpmbuild/SOURCES/conary-2.5.5.tar.gz
 
-(cd ~/rpmbuild/SOURCES && curl -O http:sqlite.org/sqlite-autoconf-3071201.tar.gz)
+(cd ~/rpmbuild/SOURCES && curl -O http://sqlite.org/sqlite-autoconf-3071201.tar.gz)
 ```
 
 ### Time to build
