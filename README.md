@@ -78,7 +78,7 @@ cat > .conaryrc << EOF
 name Anonymous
 contact <user>@email.com
 
-installLabelPath epel.cny.sas.com@sas:epel-6e centos6.rpath.com@rpath:centos-6-common centos6.rpath.com@rpath:centos-6e
+installLabelPath centos6.rpath.com@rpath:centos-6-common centos6.rpath.com@rpath:centos-6e
 
 buildLabel foo@bar:f
 
@@ -98,7 +98,7 @@ EOF
 ```bash
 touch base.system-model
 
-MODEL='group-epel-packages=epel.cny.sas.com@sas:epel-6e group-rpath-packages=centos6.rpath.com@rpath:centos-6-common group-os=centos6.rpath.com@rpath:centos-6e'
+MODEL='group-rpath-packages=centos6.rpath.com@rpath:centos-6-common group-os=centos6.rpath.com@rpath:centos-6e'
 
 for i in $MODEL;
     do
