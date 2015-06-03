@@ -106,7 +106,7 @@ for i in $MODEL;
         echo -en "search '${GRP}'\n" >> base.system-model
 done
 
-echo -en "\ninstall group-standard\nisntall group-rpath-core\n" >> base.system-model
+echo -en "\ninstall group-standard\ninstall group-rpath-core\n" >> base.system-model
 
 cp -v base.system-model /etc/conary/system-model
 
